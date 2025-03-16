@@ -3,11 +3,40 @@ import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 
 const teamMembers = [
-  { id: 1, name: "Alice Johnson", role: "CEO", contact: "alice@example.com", img: "/images/mem1.jpg" },
-  { id: 2, name: "Bob Smith", role: "Marketing Head", contact: "bob@example.com", img: "/images/mem2.jpg" },
-  { id: 3, name: "Charlie Brown", role: "Lead Designer", contact: "charlie@example.com", img: "/images/mem3.jpg" },
-  { id: 4, name: "David Lee", role: "Software Engineer", contact: "david@example.com", img: "/images/mem4.jpg" },
+  { 
+    id: 1, 
+    name: "Alice Johnson", 
+    role: "CEO", 
+    contact: "alicejohnson@gmail.com", 
+    img: "/images/mem1.jpg",
+    description: "Alice is the visionary leader of our company, guiding the team with her strategic insights and industry expertise. With over a decade of experience, she ensures the company moves towards innovation and success."
+  },
+  { 
+    id: 2, 
+    name: "Bob Smith", 
+    role: "Marketing Head", 
+    contact: "bobsmith12@gmail.com", 
+    img: "/images/mem2.jpg",
+    description: "Bob is the creative force behind our marketing strategies. His expertise in brand development and audience engagement has helped us reach new heights in the industry."
+  },
+  { 
+    id: 3, 
+    name: "Charlie Brown", 
+    role: "Lead Designer", 
+    contact: "charlieb@gmail.com", 
+    img: "/images/mem3.jpg",
+    description: "Charlie’s passion for design brings innovation to our products. He ensures that every aspect of our design aligns with user needs while maintaining aesthetic appeal."
+  },
+  { 
+    id: 4, 
+    name: "David Lee", 
+    role: "Software Engineer", 
+    contact: "david@example.com", 
+    img: "/images/mem4.jpg",
+    description: "David is a coding wizard who specializes in building seamless and efficient applications. His expertise in full-stack development is a key pillar of our technological advancements."
+  }
 ];
+
 
 const MeetTheTeam = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -56,38 +85,46 @@ const MeetTheTeam = () => {
         </button>
       </div>
 
-      {/* Member Details Modal */}
-      <AnimatePresence>
-        {selectedMember && (
-          <motion.div 
-            className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 p-4"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.8 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-          >
-            <motion.div 
-              className="bg-white bg-opacity-10 backdrop-blur-lg p-10 rounded-xl text-white text-center shadow-lg w-3/4 max-w-lg"
-              initial={{ y: 50, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: -50, opacity: 0 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-            >
-              <h3 className="text-3xl font-bold">{selectedMember.name}</h3>
-              <p className="text-gray-300 text-lg">{selectedMember.role}</p>
-              <p className="mt-3 text-xl">{selectedMember.contact}</p>
-              <button 
-                onClick={closeDetails} 
-                className="mt-6 px-6 py-3 bg-red-600 text-white text-lg rounded-lg hover:bg-red-700 transition"
-              >
-                Close
-              </button>
-            </motion.div>
-          </motion.div>
+    {/* Member Details Modal */}
+<AnimatePresence>
+  {selectedMember && (
+    <motion.div 
+      className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-0 p-4"
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.8 }}
+      transition={{ duration: 0.3, ease: "easeInOut" }}
+    >
+      <motion.div 
+        className="bg-white bg-opacity-10 backdrop-blur-lg p-10 rounded-xl text-white text-center shadow-lg w-3/4 max-w-lg"
+        initial={{ y: 50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        exit={{ y: -50, opacity: 0 }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+      >
+        <h3 className="text-3xl font-bold">{selectedMember.name}</h3>
+        <p className="text-gray-300 text-lg">{selectedMember.role}</p>
+        <p className="mt-3 text-xl">{selectedMember.contact}</p>
+
+        {/* Ensure description exists before rendering */}
+        {selectedMember.description ? (
+          <p className="mt-4 text-gray-200 text-base">{selectedMember.description}</p>
+        ) : (
+          <p className="mt-4 text-gray-400 text-sm">No additional details available.</p>
         )}
-      </AnimatePresence>     
+
+        <button 
+          onClick={closeDetails} 
+          className="mt-6 px-6 py-3 bg-blur-600 text-white text-lg rounded-lg hover:bg-white-700 transition"
+        >
+          Close
+        </button>
+      </motion.div>
+    </motion.div>
+  )}
+</AnimatePresence>
     </div>
   );
-};
+}
 
 export default MeetTheTeam;
